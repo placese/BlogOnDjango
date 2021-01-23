@@ -29,7 +29,7 @@ class PostForm(forms.ModelForm):
 
 	class Meta:
 		model = Post
-		fields = ['title', 'slug', 'body', 'tags']
+		fields = ['title', 'body', 'tags']
 
 		widgets = {
 			'title': forms.TextInput(attrs={'class': 'form-control'}),
