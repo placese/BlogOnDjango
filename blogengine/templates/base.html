@@ -30,10 +30,12 @@
 						<a class="nav-link" href="{% url 'tags_list_url' %}">Tags</a>
 					</li>
 				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+				<form class="d-flex" action="{% url 'posts_list_url' %}">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
+
 			</div>
 		</div>
 	</nav>
@@ -50,7 +52,7 @@
 							<ul class="pagination">
 								{% if page_object.has_previous %}
 									<li class="page-item">
-										<a class="page-link" href="?page={{ page_object.previous_page_number }}" tabindex="-1" aria-disabled="true"><-</a>
+										<a class="page-link" href="?page={{ page_object.previous_page_number }}&search={{search_query}}" tabindex="-1" aria-disabled="true"><-</a>
 									</li>
 								{% else %}
 									<li class="page-item disabled">
@@ -61,18 +63,18 @@
 								{% for n in page_object.paginator.page_range %}
 									{% if page_object.number == n %}
 										<li class="page-item active">
-											<a class="page-link" href="?page={{ n }}">{{ n }}</a>
+											<a class="page-link" href="?page={{ n }}&search={{search_query}}">{{ n }}</a>
 										</li>
 									{% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
 										<li class="page-item">
-											<a class="page-link" href="?page={{ n }}">{{ n }}</a>
+											<a class="page-link" href="?page={{ n }}&search={{search_query}}">{{ n }}</a>
 										</li>
 									{% endif %}
 								{% endfor %}
 
 								{% if page_object.has_next %}
 									<li class="page-item">
-										<a class="page-link" href="?page={{ page_object.next_page_number }}" aria-disabled="true">-></a>
+										<a class="page-link" href="?page={{ page_object.next_page_number }}&search={{search_query}}" aria-disabled="true">-></a>
 									</li>
 								{% else %}
 									<li class="page-item disabled">
