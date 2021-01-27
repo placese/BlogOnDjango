@@ -52,7 +52,8 @@
 							<ul class="pagination">
 								{% if page_object.has_previous %}
 									<li class="page-item">
-										<a class="page-link" href="?page={{ page_object.previous_page_number }}&search={{search_query}}" tabindex="-1" aria-disabled="true"><-</a>
+										<a class="page-link" href="?page={{ page_object.previous_page_number }}{% if searchquery %}
+										&search={{search_query}}{% endif %}" tabindex="-1" aria-disabled="true"><-</a>
 									</li>
 								{% else %}
 									<li class="page-item disabled">
@@ -63,18 +64,21 @@
 								{% for n in page_object.paginator.page_range %}
 									{% if page_object.number == n %}
 										<li class="page-item active">
-											<a class="page-link" href="?page={{ n }}&search={{search_query}}">{{ n }}</a>
+											<a class="page-link" href="?page={{ n }}{% if searchquery %}
+										&search={{search_query}}{% endif %}">{{ n }}</a>
 										</li>
 									{% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
 										<li class="page-item">
-											<a class="page-link" href="?page={{ n }}&search={{search_query}}">{{ n }}</a>
+											<a class="page-link" href="?page={{ n }}{% if searchquery %}
+										&search={{search_query}}{% endif %}">{{ n }}</a>
 										</li>
 									{% endif %}
 								{% endfor %}
 
 								{% if page_object.has_next %}
 									<li class="page-item">
-										<a class="page-link" href="?page={{ page_object.next_page_number }}&search={{search_query}}" aria-disabled="true">-></a>
+										<a class="page-link" href="?page={{ page_object.next_page_number }}{% if searchquery %}
+										&search={{search_query}}{% endif %}" aria-disabled="true">-></a>
 									</li>
 								{% else %}
 									<li class="page-item disabled">
